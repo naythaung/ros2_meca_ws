@@ -1,0 +1,20 @@
+export:
+  name: depth_perception_assembly
+  visual_option:
+    formats:
+    - obj
+    max_size_mb: 10.0
+  collision_option:
+    method: fast
+    coacd:
+      threshold: 0.05
+      resolution: 2000
+      max_convex_hull: 32
+      preprocess: true
+      seed: 42
+      max_workers: 10
+  output: output
+  bom: null
+mate_values: {}
+link_names:
+  meca500_assembled_in_zero_robot_position1_1_link_41_1: meca500_assembled_in_zero_robot_position1_1_link_41_1

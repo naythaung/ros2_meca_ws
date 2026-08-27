@@ -1,0 +1,5 @@
+kinematics:
+  use_user_defined_root: true
+names:
+  parts: {}
+  mates: {}

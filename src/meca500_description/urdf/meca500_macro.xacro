@@ -1,0 +1,218 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro">
+  <xacro:macro name="meca500" params="parent *origin">
+
+    <material name="grey">
+      <color rgba="0.2 0.2 0.2 1.0"/>
+    </material>
+
+    <joint name="${parent}_to_base_link" type="fixed">
+      <xacro:insert_block name="origin" />
+      <parent link="${parent}"/>
+      <child link="base_link"/>
+    </joint>
+
+    <link name="base_link">
+      <visual>
+        <origin xyz="0 0 0" rpy="0 0 0"/>
+        <geometry>
+          <mesh filename="package://meca500_description/meshes/link_0.dae"/>
+        </geometry>
+        <material name="grey"/>
+      </visual>
+      <collision>
+        <origin xyz="0 0 0.05" rpy="0 0 0"/>
+        <geometry>
+          <cylinder radius="0.045" length="0.105"/>
+        </geometry>
+      </collision>
+      <collision>
+        <origin xyz="-0.0125 0 0.03" rpy="0 0 0"/>
+        <geometry>
+          <box size="0.115 0.090 0.06"/>
+        </geometry>
+      </collision>
+    </link>
+
+    <joint name="meca_axis_1" type="revolute">
+      <parent link="base_link"/>
+      <child link="link_1"/>
+      <origin xyz="0 0 0.135" rpy="0 0 0"/> <axis xyz="0 0 1"/>
+      <limit lower="-3.05" upper="3.05" effort="8.4" velocity="3.926"/>
+    </joint>
+
+    <link name="link_1">
+      <visual>
+        <origin xyz="0 0 0" rpy="0 0 0"/>
+        <geometry>
+          <mesh filename="package://meca500_description/meshes/link_1.dae"/>
+        </geometry>
+        <material name="grey"/>
+      </visual>
+      <inertial>
+        <origin xyz="-0.00002037431904 0.002013004158 -0.02297639135" rpy="0 0 0"/>
+        <mass value="0.5431025133"/>
+        <inertia ixx="0.000915685257" ixy="5.49E-07" ixz="4.28E-07" iyy="0.0005022985235" iyz="0.00002704049297" izz="0.0008332485299"/>
+      </inertial>
+      <collision>
+        <origin xyz="0 0 -0.005" rpy="0 0 0"/>
+        <geometry>
+          <box size="0.065 0.1 0.08"/>
+        </geometry>
+      </collision>
+    </link>
+
+    <joint name="meca_axis_2" type="revolute">
+      <parent link="link_1"/>
+      <child link="link_2"/>
+      <origin xyz="0 0 0" rpy="0 0 0"/> <axis xyz="0 1 0"/>
+      <limit lower="-1.22" upper="1.57" effort="8.4" velocity="3.926"/>
+    </joint>
+
+    <link name="link_2">
+      <visual>
+        <origin xyz="0 0 0" rpy="0 0 0"/>
+        <geometry>
+          <mesh filename="package://meca500_description/meshes/link_2.dae"/>
+        </geometry>
+        <material name="grey"/>
+      </visual>
+      <inertial>
+        <origin xyz="-0.005076026623 0.006334754388 0.04691754408" rpy="1.57 -1.57 0"/>
+        <mass value="1.209363494"/>
+        <inertia ixx="0.001457420783" ixy="0.00009498376543" ixz="0.00001941186918" iyy="0.003988341228" iyz="0.00001173538506" izz="0.003332374168"/>
+      </inertial>
+      <collision>
+        <origin xyz="-0.005 0 0.025" rpy="0 -0.23 0"/>
+        <geometry>
+          <box size="0.067 0.065 0.11"/>
+        </geometry>
+      </collision>
+      <collision>
+        <origin xyz="-0.007 0 0.10" rpy="0 0.18 0"/>
+        <geometry>
+          <box size="0.06 0.1 0.13"/>
+        </geometry>
+      </collision>
+    </link>
+
+    <joint name="meca_axis_3" type="revolute">
+      <parent link="link_2"/>
+      <child link="link_3"/>
+      <origin xyz="0 0 0.135" rpy="0 0 0"/> <axis xyz="0 1 0"/>
+      <limit lower="-2.35" upper="1.22" effort="8.4" velocity="3.926"/>
+    </joint>
+
+    <link name="link_3">
+      <visual>
+        <origin xyz="0 0 0" rpy="0 0 0"/>
+        <geometry>
+          <mesh filename="package://meca500_description/meshes/link_3.dae"/>
+        </geometry>
+        <material name="grey"/>
+      </visual>
+      <inertial>
+        <origin xyz="0.009862786694 0.00343262302 0.01508651673" rpy="1.57 0 0"/>
+        <mass value="0.8980717937"/>
+        <inertia ixx="0.0006999643903" ixy="-0.0001856385329" ixz="0.00005438767026" iyy="0.0008589980073" iyz="0.00003237561764" izz="0.00103125794"/>
+      </inertial>
+      <collision>
+        <origin xyz="0.017 0 0.03" rpy="0 0 0"/>
+        <geometry>
+          <box size="0.09 0.045 0.065"/>
+        </geometry>
+      </collision>
+      <collision>
+        <origin xyz="0 0 -0.006" rpy="0 0 0"/>
+        <geometry>
+          <box size="0.06 0.065 0.07"/>
+        </geometry>
+      </collision>
+    </link>
+
+    <joint name="meca_axis_4" type="revolute">
+      <parent link="link_3"/>
+      <child link="link_4"/>
+      <origin xyz="0 0 0.038" rpy="0 1.5708 0"/> <axis xyz="0 0 1"/>
+      <limit lower="-2.96" upper="2.96" effort="1.25" velocity="6.108"/>
+    </joint>
+
+    <link name="link_4">
+      <visual>
+        <origin xyz="0 0 0.120" rpy="0 0 3.14159265"/>
+        <geometry>
+          <mesh filename="package://meca500_description/meshes/link_4.dae"/>
+        </geometry>
+        <material name="grey"/>
+      </visual>
+      <inertial>
+        <origin xyz="0.00006098710044 0.00224976832 0.08976460875" rpy="0 0 3.1415"/>
+        <mass value="0.2093565436"/>
+        <inertia ixx="0.0002307486811" ixy="-2.55E-07" ixz="-1.76E-07" iyy="0.0001528092348" iyz="-0.00001834894489" izz="0.0001573266858"/>
+      </inertial>
+      <collision>
+        <origin xyz="0 0 0.1025" rpy="0 0 0"/>
+        <geometry>
+          <box size="0.045 0.075 0.08"/>
+        </geometry>
+      </collision>
+    </link>
+
+    <joint name="meca_axis_5" type="revolute">
+      <parent link="link_4"/>
+      <child link="link_5"/>
+      <origin xyz="0 0 0.120" rpy="0 0 0"/> <axis xyz="0 1 0"/>
+      <limit lower="-2.00" upper="2.00" effort="1.25" velocity="6.108"/>
+    </joint>
+
+    <link name="link_5">
+      <visual>
+        <origin xyz="0 0 0" rpy="0 0 0"/>
+        <geometry>
+          <mesh filename="package://meca500_description/meshes/link_5.dae"/>
+        </geometry>
+        <material name="grey"/>
+      </visual>
+      <inertial>
+        <origin xyz="0.0000355330703 0.003727390331 0.02216669127" rpy="1.57 0 3.1415"/>
+        <mass value="0.4881954861"/>
+        <inertia ixx="0.0004368686961" ixy="8.60E-07" ixz="-3.41E-07" iyy="0.0001588423228" iyz="0.00002942257626" izz="0.0004066877932"/>
+      </inertial>
+      <collision>
+        <origin xyz="0 0 0.02" rpy="0 0 0"/>
+        <geometry>
+          <box size="0.045 0.047 0.08"/>
+        </geometry>
+      </collision>
+    </link>
+
+    <joint name="meca_axis_6" type="revolute">
+      <parent link="link_5"/>
+      <child link="link_6"/>
+      <origin xyz="0 0 0.070" rpy="0 0 0"/> <axis xyz="0 0 1"/>
+      <limit lower="-6.28" upper="6.28" effort="0.75" velocity="8.726"/>
+    </joint>
+
+    <link name="link_6">
+      <visual>
+        <origin xyz="0 0 0" rpy="0 0 0"/>
+        <geometry>
+          <mesh filename="package://meca500_description/meshes/link_6.dae"/>
+        </geometry>
+        <material name="grey"/>
+      </visual>
+      <inertial>
+        <origin xyz="0 0 0" rpy="0 0 0"/>
+        <mass value="0"/>
+        <inertia ixx="0" ixy="0" ixz="0" iyy="0" iyz="0" izz="0"/>
+      </inertial>
+      <collision>
+        <origin xyz="0 0 -0.01" rpy="0 0 0"/>
+        <geometry>
+          <cylinder radius="0.015" length="0.02"/>
+        </geometry>
+      </collision>
+    </link>
+
+  </xacro:macro>
+</robot>

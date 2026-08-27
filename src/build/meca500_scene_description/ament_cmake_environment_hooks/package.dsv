@@ -1,0 +1,4 @@
+source;share/meca500_scene_description/local_setup.bash
+source;share/meca500_scene_description/local_setup.dsv
+source;share/meca500_scene_description/local_setup.sh
+source;share/meca500_scene_description/local_setup.zsh

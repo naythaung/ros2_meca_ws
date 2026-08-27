@@ -1,0 +1,23 @@
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro" name="depth_perception_scene">
+  <xacro:macro name="depth_perception_scene" params="prefix:='' visual_mesh_ext:='stl'">
+    <link name="${prefix}meca500_assembled_in_zero_robot_position1_1_link_41_1">
+      <inertial>
+        <mass value="${inertials['meca500_assembled_in_zero_robot_position1_1_link_41_1']['mass']}"/>
+        <origin xyz="${inertials['meca500_assembled_in_zero_robot_position1_1_link_41_1']['origin']['xyz']}" rpy="${inertials['meca500_assembled_in_zero_robot_position1_1_link_41_1']['origin']['rpy']}"/>
+        <inertia ixx="${inertials['meca500_assembled_in_zero_robot_position1_1_link_41_1']['inertia']['ixx']}" iyy="${inertials['meca500_assembled_in_zero_robot_position1_1_link_41_1']['inertia']['iyy']}" izz="${inertials['meca500_assembled_in_zero_robot_position1_1_link_41_1']['inertia']['izz']}" ixy="${inertials['meca500_assembled_in_zero_robot_position1_1_link_41_1']['inertia']['ixy']}" ixz="${inertials['meca500_assembled_in_zero_robot_position1_1_link_41_1']['inertia']['ixz']}" iyz="${inertials['meca500_assembled_in_zero_robot_position1_1_link_41_1']['inertia']['iyz']}"/>
+      </inertial>
+      <visual>
+        <origin xyz="0 0 0" rpy="0 0 0"/>
+        <geometry>
+          <mesh filename="../meshes/visual/meca500_assembled_in_zero_robot_position1_1_link_41_1.${visual_mesh_ext}" scale="0.001 0.001 0.001"/>
+        </geometry>
+      </visual>
+      <collision>
+        <origin xyz="0 0 0" rpy="0 0 0"/>
+        <geometry>
+          <mesh filename="../meshes/collision/meca500_assembled_in_zero_robot_position1_1_link_41_1_0.stl" scale="0.001 0.001 0.001"/>
+        </geometry>
+      </collision>
+    </link>
+  </xacro:macro>
+</robot>

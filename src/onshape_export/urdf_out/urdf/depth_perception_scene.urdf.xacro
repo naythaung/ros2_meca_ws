@@ -1,0 +1,11 @@
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro" name="depth_perception_scene">
+  <xacro:property name="joint_limits_file" value="${load_yaml('../config/joint_limits.yaml')}"/>
+  <xacro:property name="joint_limits" value="${joint_limits_file['joint_limits']}"/>
+  <xacro:property name="inertials_file" value="${load_yaml('../config/inertials.yaml')}"/>
+  <xacro:property name="inertials" value="${inertials_file['inertials']}"/>
+  <xacro:property name="joint_transforms_file" value="${load_yaml('../config/joint_transforms.yaml')}"/>
+  <xacro:property name="joint_transforms" value="${joint_transforms_file['joint_transforms']}"/>
+  <xacro:arg name="visual_mesh_ext" default="stl"/>
+  <xacro:include filename="depth_perception_scene.xacro"/>
+  <xacro:depth_perception_scene prefix="" visual_mesh_ext="$(arg visual_mesh_ext)"/>
+</robot>
