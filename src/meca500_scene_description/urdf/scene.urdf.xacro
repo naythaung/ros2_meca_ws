@@ -6,9 +6,16 @@
 
   <!-- Shared reference frame = your Onshape assembly origin -->
   <link name="world"/>
+  <link name="scene_frame"/>
+
+  <joint name="world_to_scene" type="fixed">
+    <parent link="world"/>
+    <child link="scene_frame"/>
+    <origin xyz="0 0 0" rpy="-1.5708 0 0"/>
+  </joint>
 
   <!-- Robot, offset from world by the measured mount position -->
-  <xacro:meca500 parent="world">
+  <xacro:meca500 parent="scene_frame">
     <origin xyz="-0.15 -0.0127 0" rpy="1.5708 0 0"/>
   </xacro:meca500>
 
@@ -89,8 +96,8 @@
       </material>
     </visual>
   </link>
-  <joint name="world_to_breadboard" type="fixed">
-    <parent link="world"/>
+  <joint name="scene_to_breadboard" type="fixed">
+    <parent link="scene_frame"/>
     <child link="breadboard"/>
     <origin xyz="0 0 0" rpy="0 0 0"/>
   </joint>
@@ -108,12 +115,12 @@
     </visual>
   </link>
   <joint name="world_to_phantom" type="fixed">
-    <parent link="world"/>
+    <parent link="scene_frame"/>
     <child link="phantom"/>
     <origin xyz="0.164 -0.0427 0 " rpy="1.5708 3.14159 3.14159"/>
   </joint>
 
-  <!-- Reach envelope reference (Mecademic-published workspace shape), translucent -->
+  <!-- Reach envelope reference (Mecademic-published workspace shape), translucent
   <link name="workspace_envelope">
     <visual>
       <origin xyz="0 0 0" rpy="0 0 0"/>
@@ -128,6 +135,7 @@
   <joint name="base_to_workspace_envelope" type="fixed">
     <parent link="base_link"/>
     <child link="workspace_envelope"/>
-    <origin xyz="0 0 0" rpy="-1.5708 -3.14159 -1.5708"/>
+    <origin xyz="0 0 0" rpy="1.5708 0 3.14159"/>
   </joint>
+</robot> -->
 </robot>
