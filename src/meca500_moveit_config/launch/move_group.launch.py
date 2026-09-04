@@ -51,8 +51,24 @@ def generate_launch_description():
     planning_pipeline = {
         "planning_pipelines": ["ompl"],
         "default_planning_pipeline": "ompl",
-        "ompl": ompl_yaml
+
+        "ompl.planning_plugins": ompl_yaml["planning_plugins"],
+        "ompl.request_adapters": ompl_yaml["request_adapters"],
+        "ompl.response_adapters": ompl_yaml["response_adapters"],
+        "ompl.start_state_max_bounds_error": ompl_yaml["start_state_max_bounds_error"],
     }
+
+    planning_pipeline.update({
+        "ompl.meca_arm.default_planner_config":
+            ompl_yaml["meca_arm"]["default_planner_config"],
+
+        "ompl.meca_arm.planner_configs":
+            list(ompl_yaml["meca_arm"]["planner_configs"].keys()),
+    })
+
+    for planner_name, planner_config in ompl_yaml["meca_arm"]["planner_configs"].items():
+        for key, value in planner_config.items():
+            planning_pipeline[f"ompl.planner_configs.{planner_name}.{key}"] = value
 
     # 4. Load Controllers configuration
     controllers_yaml = load_yaml("meca500_moveit_config", "config/moveit_controllers.yaml")
@@ -98,6 +114,9 @@ def generate_launch_description():
             robot_description_semantic,
             robot_description_kinematics,
         ],
+        additional_env={
+            "QT_ENABLE_HIGHDPI_SCALING": "0",
+        },
     )
     
     robot_state_publisher_node = Node(
