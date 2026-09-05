@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<robot name="Meca500_R4">
+<robot name="meca500_scene">
     <group name="meca_arm">
         <chain base_link="base_link" tip_link="link_6"/>
     </group>
@@ -24,4 +24,15 @@
     <disable_collisions link1="link_4" link2="link_5" reason="Adjacent"/>
     <disable_collisions link1="link_4" link2="link_6" reason="Never"/>
     <disable_collisions link1="link_5" link2="link_6" reason="Adjacent"/>
+
+    <disable_collisions link1="link_6" link2="camera_adapter_bottom" reason="Adjacent"/>
+    <disable_collisions link1="link_6" link2="camera_adapter_top" reason="Adjacent"/>
+    <disable_collisions link1="link_6" link2="camera_link" reason="Adjacent"/>
+
+    <disable_collisions link1="camera_adapter_bottom" link2="camera_adapter_top" reason="Adjacent"/>
+    <disable_collisions link1="camera_adapter_bottom" link2="camera_link" reason="Adjacent"/>
+    <disable_collisions link1="camera_adapter_top" link2="camera_link" reason="Adjacent"/>
+
+    <disable_collisions link1="base_link" link2="breadboard" reason="Adjacent"/>
+    <disable_collisions link1="breadboard" link2="phantom" reason="Adjacent"/>
 </robot>

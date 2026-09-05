@@ -30,7 +30,16 @@
         <color rgba="0.9 0.8 0.1 1.0"/>
       </material>
     </visual>
+
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="package://meca500_scene_description/meshes/bottom.stl" scale="0.001 0.001 0.001"/>
+      </geometry>
+    </collision>
+
   </link>
+
   <joint name="link6_to_camera_adapter_bottom" type="fixed">
     <parent link="link_6"/>
     <child link="camera_adapter_bottom"/>
@@ -48,7 +57,15 @@
         <color rgba="0.9 0.8 0.1 1.0"/>
       </material>
     </visual>
+
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="package://meca500_scene_description/meshes/top.stl" scale="0.001 0.001 0.001"/>
+      </geometry>
+    </collision>
   </link>
+
   <joint name="adapter_bottom_to_top" type="fixed">
     <parent link="camera_adapter_bottom"/>
     <child link="camera_adapter_top"/>
@@ -66,7 +83,15 @@
         <color rgba="0.1 0.4 0.9 1.0"/>
       </material>
     </visual>
+
+    <collision>
+      <origin xyz="0 0 0" rpy="1.5708 0 0"/>
+      <geometry>
+        <mesh filename="package://meca500_scene_description/meshes/camera.stl" scale="0.001 0.001 0.001"/>
+      </geometry>
+    </collision>
   </link>
+
   <joint name="adapter_to_camera" type="fixed">
     <parent link="camera_adapter_bottom"/>
     <child link="camera_link"/>
@@ -95,7 +120,16 @@
         <color rgba="0.5 0.5 0.55 1.0"/>
       </material>
     </visual>
+
+    <collision>
+      <origin xyz="0 0 0" rpy="3.14159 0 0"/>
+      <geometry>
+        <mesh filename="package://meca500_scene_description/meshes/breadboard.stl" scale="0.001 0.001 0.001"/>
+      </geometry>
+    </collision>
+
   </link>
+
   <joint name="scene_to_breadboard" type="fixed">
     <parent link="scene_frame"/>
     <child link="breadboard"/>
@@ -120,6 +154,7 @@
         <mesh filename="package://meca500_scene_description/meshes/phantom.stl" scale="0.001 0.001 0.001"/>
       </geometry>
     </collision>
+
   </link>
   
   <joint name="world_to_phantom" type="fixed">
