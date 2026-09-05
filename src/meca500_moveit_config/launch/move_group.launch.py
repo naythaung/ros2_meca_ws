@@ -113,6 +113,7 @@ def generate_launch_description():
             robot_description,
             robot_description_semantic,
             robot_description_kinematics,
+            robot_description_planning,
         ],
         additional_env={
             "QT_ENABLE_HIGHDPI_SCALING": "0",
@@ -126,9 +127,29 @@ def generate_launch_description():
         parameters=[robot_description],
     )
 
-    joint_state_publisher_node = Node(
-        package="joint_state_publisher",
-        executable="joint_state_publisher",
+    mock_controllers_path = os.path.join(
+        get_package_share_directory("meca500_moveit_config"),
+        "config",
+        "mock_controllers.yaml",
+    )
+
+    control_node = Node(
+        package="controller_manager",
+        executable="ros2_control_node",
+        parameters=[mock_controllers_path],
+        remappings=[("robot_description", "/robot_description")],
+        output="screen",
+    )
+
+    controller_spawner = Node(
+        package="controller_manager",
+        executable="spawner",
+        arguments=[
+            "joint_state_broadcaster",
+            "meca_velocity_controller",
+            "--controller-manager", "/controller_manager",
+            "--param-file", mock_controllers_path,
+        ],
         output="screen",
     )
 
@@ -136,5 +157,6 @@ def generate_launch_description():
         run_move_group_node,
         rviz_node,
         robot_state_publisher_node,
-        joint_state_publisher_node
+        control_node,
+        controller_spawner,
     ])

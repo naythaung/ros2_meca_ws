@@ -163,6 +163,31 @@
     <origin xyz="0.164 -0.0427 0 " rpy="1.5708 3.14159 3.14159"/>
   </joint>
 
+  <!-- Laptop simulation: joint commands become simulated positions -->
+  <xacro:macro name="mock_joint" params="name">
+    <joint name="${name}">
+      <command_interface name="position"/>
+      <state_interface name="position">
+        <param name="initial_value">0.0</param>
+      </state_interface>
+      <state_interface name="velocity"/>
+    </joint>
+  </xacro:macro>
+
+  <ros2_control name="Meca500MockSystem" type="system">
+    <hardware>
+      <plugin>mock_components/GenericSystem</plugin>
+    </hardware>
+
+    <xacro:mock_joint name="meca_axis_1"/>
+    <xacro:mock_joint name="meca_axis_2"/>
+    <xacro:mock_joint name="meca_axis_3"/>
+    <xacro:mock_joint name="meca_axis_4"/>
+    <xacro:mock_joint name="meca_axis_5"/>
+    <xacro:mock_joint name="meca_axis_6"/>
+  </ros2_control>
+
+
   <!-- Reach envelope reference (Mecademic-published workspace shape), translucent
   <link name="workspace_envelope">
     <visual>
