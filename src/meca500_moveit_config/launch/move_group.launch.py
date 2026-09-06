@@ -109,6 +109,14 @@ def generate_launch_description():
         executable="rviz2",
         name="rviz2",
         output="log",
+        arguments=[
+         "-d",
+         os.path.join(
+             get_package_share_directory("meca500_moveit_config"),
+             "config",
+             "scene.rviz",
+         ),
+     ],
         parameters=[
             robot_description,
             robot_description_semantic,
