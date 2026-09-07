@@ -1,3 +1,4 @@
 {
+    "C_Cpp.default.compileCommands": "${workspaceFolder}/build/meca500_tasks/compile_commands.json",
     "python-envs.defaultEnvManager": "ms-python.python:system"
 }
