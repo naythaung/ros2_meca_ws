@@ -6,6 +6,7 @@ from launch.substitutions import Command, FindExecutable, PathJoinSubstitution
 from launch_ros.substitutions import FindPackageShare
 from launch_ros.parameter_descriptions import ParameterValue
 from ament_index_python.packages import get_package_share_directory
+from launch.actions import TimerAction
 
 def load_file(package_name, file_path):
     package_path = get_package_share_directory(package_name)
@@ -163,8 +164,11 @@ def generate_launch_description():
 
     return LaunchDescription([
         run_move_group_node,
-        rviz_node,
         robot_state_publisher_node,
         control_node,
         controller_spawner,
+        TimerAction(
+            period=8.0,
+            actions=[rviz_node],
+        ),
     ])
