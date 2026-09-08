@@ -45,21 +45,26 @@ int main(int argc, char* argv[])
         move_group_interface.setGoalPositionTolerance(0.001);
         move_group_interface.setGoalOrientationTolerance(0.01);
 
-        // 3. Set the target pose, using the tutorial's lambda format.
-        auto const target_pose = [] {
-            geometry_msgs::msg::Pose pose;
+        // 3. Read the target pose from ROS parameters.
+        double x  = node->get_parameter("x").as_double();
+        double y  = node->get_parameter("y").as_double();
+        double z  = node->get_parameter("z").as_double();
 
-            pose.position.x = 0.120;
-            pose.position.y = -0.130;
-            pose.position.z = 0.194;
+        double qx = node->get_parameter("qx").as_double();
+        double qy = node->get_parameter("qy").as_double();
+        double qz = node->get_parameter("qz").as_double();
+        double qw = node->get_parameter("qw").as_double();
 
-            pose.orientation.x = 0.0;
-            pose.orientation.y = -0.7071067811865476;
-            pose.orientation.z = 0.0;
-            pose.orientation.w = -0.7071067811865476;
+        geometry_msgs::msg::Pose target_pose;
 
-            return pose;
-        }();
+        target_pose.position.x = x;
+        target_pose.position.y = y;
+        target_pose.position.z = z;
+
+        target_pose.orientation.x = qx;
+        target_pose.orientation.y = qy;
+        target_pose.orientation.z = qz;
+        target_pose.orientation.w = qw;
 
         if (!move_group_interface.getCurrentState(10.0)) {
             RCLCPP_ERROR(logger, "No current robot state received.");
